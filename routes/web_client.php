@@ -3,8 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LoginController;
+use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\ProductController;
+use App\Http\Controllers\client\CategoryController;
 use App\Http\Controllers\Client\RegisterController;
+
+Route::get('/about', function () {
+    return view('welcome');
+})->name('about.index');
 
 Route::get('/', [HomeController::class, 'home_index'])->name('home');
 
@@ -48,4 +54,20 @@ Route::middleware('auth')
                 // Bir harydy görkezmek (show)
                 Route::get('{id}', 'show')->name('show')->where('id', '[0-9]+');
             });
+    });
+
+Route::controller(CategoryController::class)
+    ->prefix('categories')
+    ->name('categories.')
+    ->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::get('{slug}', 'show')->name('show');
+    });
+
+Route::controller(ContactController::class)
+    ->prefix('contact')
+    ->name('contact.')
+    ->group(function () {
+        Route::get('', 'index')->name('index');
+        Route::post('', 'store')->name('store');
     });
