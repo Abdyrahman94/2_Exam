@@ -22,12 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-
-        // $this->call([
-        //     UserSeeder::class,       // 👤 Userler (login üçin)
-        //     CategorySeeder::class,   // 📦 Kategoriýalar (fix: Içgiler, Snack, Miweler)
-        //     CountrySeeder::class,    // 🌍 Ýurtlar (fix: Türkmenistan, Türkiye, ABŞ...)
-        //     ProductSeeder::class,    // 🏷️ Önümler (fix: Pepsi, Coca Cola, Lays...)
-        // ]);
+        $this->call([
+            CountrySeeder::class,  // Ilki bilen ýurtlary girizýäris
+            CategorySeeder::class, // Soň kategoriýalary girizýäris
+            ProductSeeder::class,  // Ondan soň produktlary girizýäris
+            ContactSeeder::class,  // Ahyrynda kontaktlary girizýäris
+        ]);
     }
 }

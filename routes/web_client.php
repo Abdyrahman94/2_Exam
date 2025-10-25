@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Client\LoginController;
+use App\Http\Controllers\client\ProductController;
+use App\Http\Controllers\Client\RegisterController;
+
+Route::get('/', [HomeController::class, 'home_index'])->name('home');
+
+Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
+
+Route::middleware('guest')
+    ->middleware('throttle:5,1')
+    ->group(function () {
+        Route::get('login', [LoginController::class, 'create'])->name('login');
+        Route::post('login', [LoginController::class, 'store']);
+
+        Route::get('register', [RegisterController::class, 'create'])->name('register');
+        Route::post('register', [RegisterController::class, 'store']);
+    });
+
+Route::middleware('auth')
+    ->group(function () {
+        Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+    });
+
+// 🛍️ Products
+Route::middleware('auth')
+    ->group(function () {
+        Route::controller(ProductController::class)
+            ->prefix('products')
+            ->name('products.')
+            ->group(function () {
+
+                // Täze haryt goşmak (forma görkezmek)
+                Route::get('create', 'create')->name('create');
+
+                // Täze harydy baza goşmak (forma POST edilende)
+                Route::post('', 'store')->name('store');
+
+                // Harydy pozmak
+                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
+
+                // Ähli harytlar (index)
+                Route::get('', 'index')->name('index');
+
+                // Bir harydy görkezmek (show)
+                Route::get('{id}', 'show')->name('show')->where('id', '[0-9]+');
+            });
+    });

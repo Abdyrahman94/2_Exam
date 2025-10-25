@@ -4,35 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            // 🆔 ESAS ID - Her user üçin birlik san
-            $table->id();
-            
-            // 👤 USER-ÝŇ ADY - Mysal: "Aýdym", "Merdan"
-            $table->string('name');
-            
-            // 📧 EMAIL - Login üçin ulanylýar, BIRLIKLI bolmaly
-            $table->string('email')->unique();
-            
-            // 🔐 PASSWORD - Giriş paroly, şifrlenen ýaly saklanylýar
-            $table->string('password');
-            
-            // 🎭 ROLE (TÄZE) - Admin ýa-da Müşderi
-            // 'admin' - Admin panel girip biler
-            // 'client' - Diňe sahypa görüp biler
-            $table->enum('role', ['admin', 'client'])->default('client');
-
-            // 🍪 REMEMBER_TOKEN - "Meni ýatda sakla" üçin token
-            // NULL bolup biler - user "ýatda sakla" basmasa
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id();                                // Ulanyjynyň aýratyn ID-si (auto increment)
+            $table->string('name');              // Ulanyjynyň ady
+            $table->string('username')->unique();// Login üçin aýratyn username
+            $table->string('email')->unique();   // E-mail (register/login üçin)
+            $table->string('password');          // Parol (Laravel özü hash edýär)
+            $table->rememberToken();                     // “Remember me” funksiýasy üçin token
+            $table->timestamps();                        // “created_at” we “updated_at” wagtlaryny saklaýar
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

@@ -6,5 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-    //
+    protected $fillable = [
+        'name',
+        'name_tm',
+        'name_ru',
+        'code',
+    ];
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

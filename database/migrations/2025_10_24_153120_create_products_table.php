@@ -16,15 +16,19 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('country_id')->constrained()->cascadeOnDelete(); // ÖNÜMIŇ ÝURDY
             $table->string('name');
+            $table->string('name_tm');
+            $table->string('name_ru');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
+            $table->text('description_tm')->nullable();
+            $table->text('description_ru')->nullable();
             $table->float('price');
             $table->boolean('is_discount')->default(false);
             $table->integer('discount_percent')->default(0);
             $table->string('image')->nullable();
             $table->boolean('is_new')->default(false);
             $table->boolean('is_stock')->default(true);
-            $table->timestamps();
+            $table->timestamps();   
         });
     }
 
