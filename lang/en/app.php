@@ -1,6 +1,7 @@
 <?php
 return [
     "EcoStore" => "EcoStore",
+    "Welcome to EcoStore" => "Welcome to EcoStore",
     "Home" => "Home",
     "Products" => "Products",
     "Contacts" => "Contacts",

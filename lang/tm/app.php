@@ -1,6 +1,7 @@
 <?php
 return [
     "EcoStore" => "EcoStore",
+    "Welcome to EcoStore" => "EcoStore-a hoş geldiňiz",
     "Home" => "Bas sahypa",
     "Products" => "Produktylar",
     "Contacts" => "Habar ibermek",

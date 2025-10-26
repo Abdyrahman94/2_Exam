@@ -1,6 +1,7 @@
 <?php
 return [
     "EcoStore" => "ЭкоМагазин",
+    "Welcome to EcoStore" => "Добро пожаловать в ЭкоМагазин",
     "Home" => "Главная",
     "Products" => "Продукты",
     "Contacts" => "связаться",
