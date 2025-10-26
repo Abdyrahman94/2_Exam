@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-success shadow-sm" data-bs-theme="dark">
     <div class="container-xl">
         <a class="navbar-brand fw-bold" href="#">
-            EcoStore
+            {{__('app.EcoStore')}}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,19 +11,19 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link  {{ Request::routeIs('home') ? 'active' : '' }}" aria-current="page"
-                        href="{{ route('home') }}">Home</a>
+                        href="{{ route('home.index') }}">{{ __('app.Home') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('products.index') ? 'active' : '' }}"
-                        href="{{ route('products.index') }}">Products</a>
+                        href="{{ route('products.index') }}">{{ __('app.Products') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('contact.index') ? 'active' : '' }}"
-                        href="{{ route('contact.index') }}">Contacts</a>
+                        href="{{ route('contact.index') }}">{{ __('app.Contacts') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ Request::routeIs('About.index') ? 'active' : '' }}"
-                        href="{{ route('About.index') }}">About</a>
+                        href="{{ route('about.index') }}">{{ __('app.About') }}</a>
                 </li>
             </ul>
 

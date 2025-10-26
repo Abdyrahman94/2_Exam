@@ -12,7 +12,9 @@ Route::get('/about', function () {
     return view('welcome');
 })->name('about.index');
 
-Route::get('/', [HomeController::class, 'home_index'])->name('home');
+Route::get('/', function () {
+    return view('client.home.index');
+})->name('home.index');
 
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
