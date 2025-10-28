@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-success shadow-sm" data-bs-theme="dark">
     <div class="container-xl">
         <a class="navbar-brand fw-bold" href="#">
-            {{__('app.EcoStore')}}
+            {{ __('app.EcoStore') }}
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link  {{ Request::routeIs('home') ? 'active' : '' }}" aria-current="page"
+                    <a class="nav-link  {{ Request::routeIs('home.index') ? 'active' : '' }}" aria-current="page"
                         href="{{ route('home.index') }}">{{ __('app.Home') }}</a>
                 </li>
                 <li class="nav-item">
@@ -22,13 +22,19 @@
                         href="{{ route('contact.index') }}">{{ __('app.Contacts') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::routeIs('About.index') ? 'active' : '' }}"
+                    <a class="nav-link {{ Request::routeIs('about.index') ? 'active' : '' }}"
                         href="{{ route('about.index') }}">{{ __('app.About') }}</a>
                 </li>
             </ul>
 
-            
+
             <form class="d-flex align-items-center" role="search">
+                <div class="me-2">
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-sm"><span
+                            class="bi-box-arrow-in-right me-2"></span>{{ __('app.Login') }}</a>
+                    <a href="{{ route('register') }}" class="btn btn-warning btn-sm ms-2">{{ __('app.Register') }}
+                        <span class="bi-person-plus"></span></a>
+                </div>
                 <li class="nav-item dropdown list-unstyled me-2">
                     <a class="btn btn-info btn-sm dropdown-toggle" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-translate"></i> {{ __('app.Language') }} </a>
@@ -55,6 +61,11 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-sm position-relative my-1 my-lg-2 mx-lg-1" href="">
+                        <i class="bi bi-basket"></i> Sebet <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" id="cart">0</span>
+                    </a>
                 </li>
             </form>
         </div>

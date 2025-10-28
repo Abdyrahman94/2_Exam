@@ -12,10 +12,10 @@ Route::get('/about', function () {
     return view('welcome');
 })->name('about.index');
 
-Route::get('/', function () {
-    return view('client.home.index');
-})->name('home.index');
-
+// Route::get('/', function () {
+//     return view('client.home.index');
+// })->name('home.index');
+Route::get('/',[HomeController::class,'home_index'])->name('home.index');
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
 Route::middleware('guest')
@@ -40,16 +40,7 @@ Route::middleware('auth')
             ->prefix('products')
             ->name('products.')
             ->group(function () {
-
-                // Täze haryt goşmak (forma görkezmek)
-                Route::get('create', 'create')->name('create');
-
-                // Täze harydy baza goşmak (forma POST edilende)
-                Route::post('', 'store')->name('store');
-
-                // Harydy pozmak
-                Route::delete('{id}', 'destroy')->name('destroy')->where('id', '[0-9]+');
-
+                
                 // Ähli harytlar (index)
                 Route::get('', 'index')->name('index');
 

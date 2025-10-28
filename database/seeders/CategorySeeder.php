@@ -26,6 +26,7 @@ class CategorySeeder extends Seeder
                 'name' => $category['name'],
                 'name_tm' => $category['name_tm'],
                 'name_ru' => $category['name_ru'],
+                'type' => strtolower(Str::singular($category['name'])),
                 'slug' => Str::slug($category['name']),
             ]);
         }

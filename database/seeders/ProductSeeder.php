@@ -63,7 +63,7 @@ class ProductSeeder extends Seeder
                 'price' => 7.0,
                 'is_discount' => false,
                 'discount_percent' => 0,
-                'image' => 'img/Lipton Tea.jpg',
+                'image' => 'img/Lipton Tea.jpeg',
                 'is_new' => false,
                 'is_stock' => true,
             ],

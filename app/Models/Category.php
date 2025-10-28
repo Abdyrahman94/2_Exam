@@ -10,6 +10,7 @@ class Category extends Model
         'name',
         'name_tm',
         'name_ru',
+        'type',
         'slug',
     ];
     
