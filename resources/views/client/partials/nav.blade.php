@@ -64,7 +64,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-primary btn-sm position-relative my-1 my-lg-2 mx-lg-1" href="">
-                        <i class="bi bi-basket"></i> Sebet <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" id="cart">0</span>
+                        <i class="bi bi-basket me-1"></i>{{ __('app.Cart') }}<span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" id="cart">0</span>
                     </a>
                 </li>
             </form>

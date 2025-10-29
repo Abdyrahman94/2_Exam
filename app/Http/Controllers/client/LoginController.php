@@ -49,7 +49,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken(); // CSRF token täzelenýär
 
         // Baş sahypa ugradyýar
-        return redirect()->route('home')
+        return redirect()->route('home.index')
             ->with([
                 'success' => 'Ustunlikli cykys edildi',
             ]);

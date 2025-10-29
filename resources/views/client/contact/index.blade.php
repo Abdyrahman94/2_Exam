@@ -91,50 +91,88 @@
     </nav>
     <div class="container-lg py-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-md-5 bg-light">
-                            @if ($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}"
-                                    class="img-fluid w-100 h-100 object-fit-cover" alt="{{ $product->name_tm }}">
-                            @else
-                                <img src="{{ asset('images/no-image.png') }}"
-                                    class="img-fluid w-100 h-100 object-fit-cover" alt="No image">
-                            @endif
-                        </div>
-                        <div class="col-md-7">
-                            <div class="card-body p-4 d-flex flex-column h-100">
-                                <h3 class="fw-bold text-dark">{{ $product->name_tm }}</h3>
-                                <p class="text-black mb-1 mt-2">
-                                    {{ __('app.Place of manufacture') }}:
-                                    <span class="fw-semibold">{{ $product->country->name ?? '—' }}</span>
-                                </p>
-                                <p class="text-black mt-2">
-                                    {{ __('app.Category') }}:
-                                    <span class="fw-semibold">{{ $product->category->name_tm ?? '—' }}</span>
-                                </p>
-                                <p class="text-black">
-                                    {{ __('app.Description') }}:
-                                    <span class="fw-semibold">{{ $product->description_tm }}</span>
-                                </p>
-                                <div class="mt-auto">
-                                    <h4 class="fw-bold text-success mb-3">{{ $product->price }} TMT</h4>
-                                    <div class="d-flex">
-                                        <a href="{{ route('products.index') }}"
-                                            class="btn btn-outline-secondary me-2">
-                                            <i class="bi bi-arrow-left me-2"></i> Yza
-                                        </a>
-                                        <button type="button" class="btn btn-primary">
-                                            <i class="bi bi-basket-fill me-2"></i> Sebede goş
+            <div class="col-lg-10">
+
+                <h2 class="fw-bold text-center mb-5 text-primary">
+                    Biz bilen habarlaşyň
+                </h2>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show rounded-3" role="alert">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm  rounded-4 h-100">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3 text-dark">Hatyňyzy bize ugratmagyňyz üçin forma</h5>
+
+                                <form action="{{ route('contact.store') }}" method="POST">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Adyňyz</label>
+                                        <input type="text" id="name" name="name"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            placeholder="Adyňyzy giriziň" value="{{ old('name') }}" required>
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email adresiňiz</label>
+                                        <input type="email" id="email" name="email"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            placeholder="example@email.com" value="{{ old('email') }}" required>
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Hatyňyz</label>
+                                        <textarea id="message" name="message" rows="5" class="form-control @error('message') is-invalid @enderror"
+                                            placeholder="Hatyňyzy şu ýere ýazyň..." required>{{ old('message') }}</textarea>
+                                        @error('message')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary btn-lg rounded-3">
+                                            <i class="bi bi-send-fill me-2"></i> Ugrat
                                         </button>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card shadow-sm rounded-4 h-100 bg-light">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3 text-dark">Aragatnaşyk maglumatlary</h5>
+
+                                <ul class="list-unstyled text-secondary mb-4">
+                                    <li class="mb-3">
+                                        <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                                        Aşgabat, Türkmenistan
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-telephone-fill text-primary me-2"></i>
+                                        +993 61 12 34 56
+                                    </li>
+                                    <li class="mb-3">
+                                        <i class="bi bi-envelope-fill text-primary me-2"></i>
+                                        info@mysite.tm
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-clock-fill text-primary me-2"></i>
+                                        Duşenbe - Şenbe: 09:00 - 18:00
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

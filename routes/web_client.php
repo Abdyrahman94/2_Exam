@@ -45,16 +45,8 @@ Route::middleware('auth')
                 Route::get('', 'index')->name('index');
 
                 // Bir harydy görkezmek (show)
-                Route::get('{id}', 'show')->name('show')->where('id', '[0-9]+');
+                Route::get('{slug}', 'show')->name('show')->where('id', '[0-9]+');
             });
-    });
-
-Route::controller(CategoryController::class)
-    ->prefix('categories')
-    ->name('categories.')
-    ->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('{slug}', 'show')->name('show');
     });
 
 Route::controller(ContactController::class)
