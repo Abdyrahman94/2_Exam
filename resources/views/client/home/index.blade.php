@@ -4,18 +4,17 @@
     <div class="container-lg py-5">
         <div class="row justify-content-center mb-5">
             <div class="col-md-8">
-                <form action="{{ route('products.index') }}" method="GET" class="d-flex shadow-sm rounded-5">
-                    <input type="text" name="search" class="form-control me-2 rounded-5" placeholder="Haryt gözläň..."
-                        value="{{ request('search') }}">
-                    <button class="btn btn-primary rounded-5" type="submit"><span class="bi bi-search"></span></button>
+                <form action="{{ route('products.index') }}" method="get" class="d-flex mt-4">
+                    <input type="text" name="q" class="form-control me-2 rounded-5 py-3"
+                        placeholder="Search products..." value="{{ request('q') }}">
+                    <button type="submit" class="btn btn-primary rounded-5">
+                        <i class="bi bi-search"></i>
+                    </button>
                 </form>
             </div>
         </div>
-
-        {{-- 🛍️ Täze harytlar --}}
         <div class="mb-5">
-            <h3 class="fw-bold text-dark mb-4 text-center">Täze harytlar</h3>
-
+            <h3 class="fw-bold text-dark mb-4 text-center">{{ __('app.New Products') }}</h3>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                 @foreach ($products as $product)
                     <div class="col">
@@ -33,13 +32,10 @@
                                 <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
                                 <div class="mt-auto">
                                     <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-primary w-100">
-                                            <span class="bi bi-basket-fill me-2"></span>Sebede goş
-                                        </button>
-                                        {{-- {{ route('cart.add', $product->id) }} --}}
-                                    </form>
+                                    <button type="button" class="btn btn-outline-primary w-100"
+                                        data-id="{{ $product->id }}">
+                                        <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
+                                    </button>
                                 </div>
                             </div>
                         </div>

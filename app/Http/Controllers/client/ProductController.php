@@ -9,24 +9,31 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
-         // 🔹 Ulanyjynyň girizen maglumatlaryny barla
+        // 🔹 Ulanyjynyň girizen maglumatlaryny barla
         $request->validate([
             'drink' => ['nullable', 'integer', 'min:1'],
             'sweet' => ['nullable', 'integer', 'min:1'],
             'snack' => ['nullable', 'integer', 'min:1'],
             'fruit' => ['nullable', 'integer', 'min:1'],
+            'q' => ['nullable', 'string', 'max:255'],
         ]);
-        
+
         // 🔹 Ulanyjynyň saýlan filtrleriniň bahalary
         $f_drink = $request->drink ? $request->drink : 0;
         $f_sweet = $request->sweet ? $request->sweet : 0;
         $f_snack = $request->snack ? $request->snack : 0;
         $f_fruit = $request->fruit ? $request->fruit : 0;
+        $f_q = $request->q ?? '';
 
-         // 🔹 Harytlary sorag arkaly alýarys
+        // 🔹 Harytlary sorag arkaly alýarys
         $products = Product::query()
+            ->when($f_q, function ($query) use ($f_q) {
+                $query->where('name_tm', 'like', "%{$f_q}%")
+                ->orWhere('name', 'like', "%{$f_q}%");
+            })
             ->when($f_drink, function ($query) use ($f_drink) {
                 return $query->where('id', $f_drink);
             })
@@ -47,7 +54,7 @@ class ProductController extends Controller
         // 🔹 Ähli kategoriýalar (dropdown üçin)
         $categories = Category::with('products')->get();
 
-         // 🔹 Görnüşe ugradyarys
+        // 🔹 Görnüşe ugradyarys
         return view('client.products.index')->with([
             'products' => $products,
             'categories' => $categories,
@@ -55,11 +62,12 @@ class ProductController extends Controller
             'f_sweet' => $f_sweet,
             'f_snack' => $f_snack,
             'f_fruit' => $f_fruit,
+            'f_q' => $f_q,
         ]);
 
     }
 
-     public function show($slug)
+    public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
 

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Client\CartController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LoginController;
 use App\Http\Controllers\client\ContactController;
@@ -12,10 +13,7 @@ Route::get('/about', function () {
     return view('welcome');
 })->name('about.index');
 
-// Route::get('/', function () {
-//     return view('client.home.index');
-// })->name('home.index');
-Route::get('/',[HomeController::class,'home_index'])->name('home.index');
+Route::get('/', [HomeController::class,'home_index'])->name('home.index');
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
 Route::middleware('guest')
@@ -40,7 +38,7 @@ Route::middleware('auth')
             ->prefix('products')
             ->name('products.')
             ->group(function () {
-                
+
                 // Ähli harytlar (index)
                 Route::get('', 'index')->name('index');
 
@@ -55,4 +53,18 @@ Route::controller(ContactController::class)
     ->group(function () {
         Route::get('', 'index')->name('index');
         Route::post('', 'store')->name('store');
+    });
+
+Route::middleware('auth')
+    ->group(function () {
+        Route::controller(CartController::class)
+            ->prefix('cart')
+            ->name('cart')
+            ->group(function(){
+                Route::get('', 'index')->name('cart.index');
+                Route::post('{id}', 'add')->name('cart.add');
+                Route::delete('{id}', 'remove')->name('cart.remove');
+                Route::delete('', 'clear')->name('cart.clear');
+
+            });
     });

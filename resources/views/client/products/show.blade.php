@@ -123,10 +123,10 @@
                                     <div class="d-flex">
                                         <a href="{{ route('products.index') }}"
                                             class="btn btn-outline-secondary me-2">
-                                            <i class="bi bi-arrow-left me-2"></i> Yza
+                                            <i class="bi bi-arrow-left me-2"></i> {{ __('app.Back') }}
                                         </a>
-                                        <button type="button" class="btn btn-primary">
-                                            <i class="bi bi-basket-fill me-2"></i> Sebede goş
+                                       <button type="button" class="btn btn-outline-primary w-100" data-id="{{ $product->id }}">
+                                            <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
                                         </button>
                                     </div>
                                 </div>

@@ -157,7 +157,7 @@
 
 
             <div class="col-lg-9">
-                <h4 class="fw-bold mb-4 text-center text-dark">Harytlar</h4>
+                <h4 class="fw-bold mb-4 text-center text-dark">{{ __('app.Products') }}</h4>
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     @foreach ($products as $product)
                         <div class="col">
@@ -171,7 +171,7 @@
                                     <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
                                     <div class="mt-auto">
                                         <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
-                                        <button type="button" class="btn btn-outline-primary w-100">
+                                        <button type="button" class="btn btn-outline-primary w-100" data-id="{{ $product->id }}">
                                             <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
                                         </button>
                                     </div>
