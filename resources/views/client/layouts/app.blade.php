@@ -32,45 +32,9 @@
             /* Footeriň uly bolmagyna ýol berer, aşakda durar */
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartCount = document.getElementById('cart_count');
-            const addButtons = document.querySelectorAll('.add-to-cart');
 
-            addButtons.forEach(button => {
-                button.addEventListener('click', async function() {
-                    const productId = this.dataset.id;
-
-                    try {
-                        const response = await fetch(`/cart/add/${productId}`, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                'Accept': 'application/json',
-                            },
-                        });
-
-                        if (response.ok) {
-                            // San +1
-                            let count = parseInt(cartCount.textContent);
-                            cartCount.textContent = count + 1;
-
-                            // Düğmäni “Goşuldy” görnüşine geçir
-                            this.innerHTML = '<i class="bi bi-check-lg me-2"></i> Goşuldy!';
-                            this.classList.remove('btn-outline-primary');
-                            this.classList.add('btn-success');
-                            this.disabled = true;
-                        } else {
-                            console.error('Sebede goşmakda säwlik boldy.');
-                        }
-                    } catch (error) {
-                        console.error('Server bilen baglanyşyk ýok:', error);
-                    }
-                });
-            });
-        });
-    </script>
 </head>
+
 
 <body>
     @include('client.partials.app')
@@ -81,7 +45,46 @@
     </main>
 
     @include('client.partials.footer')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('.add-to-cart-form');
+            const cartCount = document.getElementById('cart_count');
 
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault(); // sahypany täzeden ýükleme
+                    const action = form.getAttribute('action');
+                    const btn = form.querySelector('button');
+
+                    fetch(action, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                cartCount.textContent = data.count; // sany täzeläň
+                                btn.innerHTML =
+                                    '<i class="bi bi-check-circle-fill me-2"></i> Goşuldy!';
+                                btn.classList.remove('btn-outline-primary');
+                                btn.classList.add('btn-success');
+
+                                setTimeout(() => {
+                                    btn.innerHTML =
+                                        '<i class="bi bi-basket-fill me-2"></i> Sebede goş';
+                                    btn.classList.remove('btn-success');
+                                    btn.classList.add('btn-outline-primary');
+                                }, 2000);
+                            }
+                        })
+                        .catch(err => console.error('Error:', err));
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

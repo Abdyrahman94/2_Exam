@@ -32,10 +32,13 @@
                                 <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
                                 <div class="mt-auto">
                                     <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
-                                    <button type="button" class="btn btn-outline-primary w-100"
-                                        data-id="{{ $product->id }}">
-                                        <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
-                                    </button>
+                                    <form action="{{ route('cart.add', $product->id) }}" method="POST"
+                                        class="add-to-cart-form">
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-primary w-100">
+                                            <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -43,6 +46,5 @@
                 @endforeach
             </div>
         </div>
-
     </div>
 @endsection

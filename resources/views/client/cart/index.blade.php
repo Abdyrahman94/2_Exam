@@ -59,11 +59,12 @@
                     <i class="bi bi-x-circle me-2"></i> Sebedi boşat
                 </button>
             </form>
-
+            
             <h4 class="fw-bold text-dark mb-0">
                 Jemi: <span class="text-success">{{ number_format($total, 2) }} TMT</span>
             </h4>
         </div>
+        <a href="#" class="btn btn-outline-primary mt-2">Sargyt Etmek</a>
     @endif
 </div>
 @endsection

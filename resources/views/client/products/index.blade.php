@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.min.css') }}">
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    
+
 </head>
 
 <body>
@@ -80,10 +80,11 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm position-relative my-1 my-lg-2 mx-lg-1" href="">
+                        <a class="btn btn-primary btn-sm position-relative my-1 my-lg-2 mx-lg-1"
+                            href="{{ route('cart.index') }}">
                             <i class="bi bi-basket me-1"></i>{{ __('app.Cart') }}<span
                                 class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill"
-                                id="cart">0</span>
+                                id="cart_count"> {{ session('cart') ? count(session('cart')) : 0 }}</span>
                         </a>
                     </li>
                 </form>
@@ -107,7 +108,7 @@
                             @endforeach
                         @endforeach
                     </select>
-                    <label for="snack" class="form-label mt-1">{{__('app.Snacks')}}: </label>
+                    <label for="snack" class="form-label mt-1">{{ __('app.Snacks') }}: </label>
                     <select class="form-select mb-2" name="snack" id="snack">
                         <option value="">-</option>
                         @foreach ($categories->where('type', 'snack') as $category)
@@ -171,9 +172,13 @@
                                     <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
                                     <div class="mt-auto">
                                         <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
-                                        <button type="button" class="btn btn-outline-primary w-100" data-id="{{ $product->id }}">
-                                            <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
-                                        </button>
+                                        <form action="{{ route('cart.add', $product->id) }}" method="POST"
+                                            class="add-to-cart-form">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-primary w-100">
+                                                <i class="bi bi-basket-fill me-2"></i> {{ __('app.Add cart') }}
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
 
@@ -186,6 +191,47 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const forms = document.querySelectorAll('.add-to-cart-form');
+                const cartCount = document.getElementById('cart_count');
+
+                forms.forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault(); // sahypany täzeden ýükleme
+                        const action = form.getAttribute('action');
+                        const btn = form.querySelector('button');
+
+                        fetch(action, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.success) {
+                                    cartCount.textContent = data.count; // sany täzeläň
+                                    btn.innerHTML =
+                                        '<i class="bi bi-check-circle-fill me-2"></i> Goşuldy!';
+                                    btn.classList.remove('btn-outline-primary');
+                                    btn.classList.add('btn-success');
+
+                                    setTimeout(() => {
+                                        btn.innerHTML =
+                                            '<i class="bi bi-basket-fill me-2"></i> Sebede goş';
+                                        btn.classList.remove('btn-success');
+                                        btn.classList.add('btn-outline-primary');
+                                    }, 2000);
+                                }
+                            })
+                            .catch(err => console.error('Error:', err));
+                    });
+                });
+            });
+        </script>
 </body>
 
 </html>

@@ -55,16 +55,9 @@ Route::controller(ContactController::class)
         Route::post('', 'store')->name('store');
     });
 
-Route::middleware('auth')
-    ->group(function () {
-        Route::controller(CartController::class)
-            ->prefix('cart')
-            ->name('cart')
-            ->group(function(){
-                Route::get('', 'index')->name('cart.index');
-                Route::post('{id}', 'add')->name('cart.add');
-                Route::delete('{id}', 'remove')->name('cart.remove');
-                Route::delete('', 'clear')->name('cart.clear');
-
-            });
-    });
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+});
