@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-success shadow-sm" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-success shadow-sm sticky-top" data-bs-theme="dark">
     <div class="container-xl">
         <a class="navbar-brand fw-bold" href="#">
             {{ __('app.EcoStore') }}

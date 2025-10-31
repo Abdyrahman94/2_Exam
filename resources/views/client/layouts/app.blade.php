@@ -24,12 +24,12 @@
 
         main {
             flex: 1 0 auto;
-            /* content-ä ýer berýär */
+            
         }
 
         footer {
             flex-shrink: 0;
-            /* Footeriň uly bolmagyna ýol berer, aşakda durar */
+            
         }
     </style>
 
@@ -52,7 +52,7 @@
 
             forms.forEach(form => {
                 form.addEventListener('submit', function(e) {
-                    e.preventDefault(); // sahypany täzeden ýükleme
+                    e.preventDefault();
                     const action = form.getAttribute('action');
                     const btn = form.querySelector('button');
 
@@ -66,7 +66,7 @@
                         .then(res => res.json())
                         .then(data => {
                             if (data.success) {
-                                cartCount.textContent = data.count; // sany täzeläň
+                                cartCount.textContent = data.count;
                                 btn.innerHTML =
                                     '<i class="bi bi-check-circle-fill me-2"></i> Goşuldy!';
                                 btn.classList.remove('btn-outline-primary');

@@ -11,13 +11,13 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();                                // Ulanyjynyň aýratyn ID-si (auto increment)
-            $table->string('name');              // Ulanyjynyň ady
-            $table->string('username')->unique();// Login üçin aýratyn username
-            $table->string('email')->unique();   // E-mail (register/login üçin)
-            $table->string('password');          // Parol (Laravel özü hash edýär)
-            $table->rememberToken();                     // “Remember me” funksiýasy üçin token
-            $table->timestamps();                        // “created_at” we “updated_at” wagtlaryny saklaýar
+            $table->id();
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

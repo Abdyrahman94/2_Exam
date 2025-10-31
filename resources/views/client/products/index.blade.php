@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-success shadow-sm" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg bg-success shadow-sm sticky-top" data-bs-theme="dark">
         <div class="container-xl">
             <a class="navbar-brand fw-bold" href="#">
                 {{ __('app.EcoStore') }}
@@ -199,7 +199,7 @@
 
                 forms.forEach(form => {
                     form.addEventListener('submit', function(e) {
-                        e.preventDefault(); // sahypany täzeden ýükleme
+                        e.preventDefault();
                         const action = form.getAttribute('action');
                         const btn = form.querySelector('button');
 
@@ -213,7 +213,7 @@
                             .then(res => res.json())
                             .then(data => {
                                 if (data.success) {
-                                    cartCount.textContent = data.count; // sany täzeläň
+                                    cartCount.textContent = data.count;
                                     btn.innerHTML =
                                         '<i class="bi bi-check-circle-fill me-2"></i> Goşuldy!';
                                     btn.classList.remove('btn-outline-primary');

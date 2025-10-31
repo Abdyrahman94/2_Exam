@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = session()->get('cart', []); // session-dan sebet maglumatlaryny al
+        $cart = session()->get('cart', []);
         return view('client.cart.index', compact('cart'));
     }
 
@@ -31,8 +31,6 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-
-        // AJAX arkaly jogap
         if ($request->ajax()) {
             return response()->json([
                 'success' => true,
@@ -48,9 +46,9 @@ class CartController extends Controller
 
         if (isset($cart[$id])) {
             if ($cart[$id]['quantity'] > 1) {
-                $cart[$id]['quantity']--; // diňe 1 sanysyny azalt
+                $cart[$id]['quantity']--;
             } else {
-                unset($cart[$id]); // soňky bolsa poz
+                unset($cart[$id]);
             }
             session()->put('cart', $cart);
         }

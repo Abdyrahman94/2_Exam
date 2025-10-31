@@ -6,7 +6,6 @@ use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\LoginController;
 use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\ProductController;
-use App\Http\Controllers\client\CategoryController;
 use App\Http\Controllers\Client\RegisterController;
 
 Route::get('/about', function () {
@@ -31,18 +30,13 @@ Route::middleware('auth')
         Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
     });
 
-// 🛍️ Products
 Route::middleware('auth')
     ->group(function () {
         Route::controller(ProductController::class)
             ->prefix('products')
             ->name('products.')
             ->group(function () {
-
-                // Ähli harytlar (index)
                 Route::get('', 'index')->name('index');
-
-                // Bir harydy görkezmek (show)
                 Route::get('{slug}', 'show')->name('show')->where('id', '[0-9]+');
             });
     });
