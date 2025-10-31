@@ -22,14 +22,14 @@
                             <a href="{{ route('products.show', $product->slug) }}" class="ratio ratio-1x1 bg-light d-block">
                                 @if ($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}"
-                                        class="card-img-top object-fit-cover" alt="{{ $product->name_tm }}">
+                                        class="card-img-top object-fit-cover" alt="{{ $product->getName()}}">
                                 @else
                                     <img src="{{ asset('images/no-image.png') }}" class="card-img-top object-fit-cover"
                                         alt="No image">
                                 @endif
                             </a>
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
+                                <h5 class="card-title fw-bold">{{ $product->getName() }}</h5>
                                 <div class="mt-auto">
                                     <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
                                     <form action="{{ route('cart.add', $product->id) }}" method="POST"

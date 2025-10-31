@@ -103,7 +103,7 @@
                             @foreach ($category->products as $productOption)
                                 <option value="{{ $productOption->id }}"
                                     {{ (int) request('drink') === $productOption->id || (isset($f_drink) && $f_drink == $productOption->id) ? 'selected' : '' }}>
-                                    {{ $productOption->name_tm ?? $productOption->name }}
+                                    {{ $productOption->getName() ?? $productOption->name }}
                                 </option>
                             @endforeach
                         @endforeach
@@ -115,7 +115,7 @@
                             @foreach ($category->products as $productOption)
                                 <option value="{{ $productOption->id }}"
                                     {{ (int) request('snack') === $productOption->id || (isset($f_snack) && $f_snack == $productOption->id) ? 'selected' : '' }}>
-                                    {{ $productOption->name_tm ?? $productOption->name }}
+                                    {{ $productOption->getName() ?? $productOption->name }}
                                 </option>
                             @endforeach
                         @endforeach
@@ -127,7 +127,7 @@
                             @foreach ($category->products as $productOption)
                                 <option value="{{ $productOption->id }}"
                                     {{ (int) request('sweet') === $productOption->id || (isset($f_sweet) && $f_sweet == $productOption->id) ? 'selected' : '' }}>
-                                    {{ $productOption->name_tm ?? $productOption->name }}
+                                    {{ $productOption->getName() ?? $productOption->name }}
                                 </option>
                             @endforeach
                         @endforeach
@@ -139,7 +139,7 @@
                             @foreach ($category->products as $productOption)
                                 <option value="{{ $productOption->id }}"
                                     {{ (int) request('fruit') === $productOption->id || (isset($f_fruit) && $f_fruit == $productOption->id) ? 'selected' : '' }}>
-                                    {{ $productOption->name_tm ?? $productOption->name }}
+                                    {{ $productOption->getName() ?? $productOption->name }}
                                 </option>
                             @endforeach
                         @endforeach
@@ -166,10 +166,10 @@
                                 <a href="{{ route('products.show', $product->slug) }}"
                                     class="ratio ratio-1x1 d-block bg-light">
                                     <img src="{{ asset('storage/' . $product->image) }}"
-                                        class="card-img-top object-fit-cover" alt="{{ $product->name_tm }}">
+                                        class="card-img-top object-fit-cover" alt="{{ $product->getName() }}">
                                 </a>
                                 <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title fw-bold">{{ $product->name_tm }}</h5>
+                                    <h5 class="card-title fw-bold">{{ $product->getName() }}</h5>
                                     <div class="mt-auto">
                                         <p class="fw-bold text-success mb-2">{{ $product->price }} TMT</p>
                                         <form action="{{ route('cart.add', $product->id) }}" method="POST"

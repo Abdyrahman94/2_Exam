@@ -33,4 +33,28 @@ class Product extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    public function getName()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->name_tm ?: $this->name;
+        } else if ($locale == 'ru') {
+            return $this->name_ru ?: $this->name;
+        }
+        return $this->name;
+    }
+
+    public function getDescription()
+    {
+        $locale = app()->getLocale();
+
+        if ($locale == 'tm') {
+            return $this->description_tm ?: $this->description;
+        } else if ($locale == 'ru') {
+            return $this->description_ru ?: $this->description;
+        }
+        return $this->description;
+    }
 }

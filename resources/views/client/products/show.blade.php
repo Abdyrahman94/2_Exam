@@ -106,18 +106,18 @@
                         </div>
                         <div class="col-md-7">
                             <div class="card-body p-4 d-flex flex-column h-100">
-                                <h3 class="fw-bold text-dark">{{ $product->name_tm }}</h3>
+                                <h3 class="fw-bold text-dark">{{ $product->getName() }}</h3>
                                 <p class="text-black mb-1 mt-2">
                                     {{ __('app.Place of manufacture') }}:
                                     <span class="fw-semibold">{{ $product->country->name ?? '—' }}</span>
                                 </p>
                                 <p class="text-black mt-2">
                                     {{ __('app.Category') }}:
-                                    <span class="fw-semibold">{{ $product->category->name_tm ?? '—' }}</span>
+                                    <span class="fw-semibold">{{ $product->category->getName() ?? '—' }}</span>
                                 </p>
                                 <p class="text-black">
                                     {{ __('app.Description') }}:
-                                    <span class="fw-semibold">{{ $product->description_tm }}</span>
+                                    <span class="fw-semibold">{{ $product->getDescription() }}</span>
                                 </p>
                                 <div class="mt-auto">
                                     <h4 class="fw-bold text-success mb-3">{{ $product->price }} TMT</h4>
