@@ -15,7 +15,7 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = Category::all()->keyBy('name'); // 'Drinks', 'Snacks', 'Sweets', 'Fruits'
+        $categories = Category::all()->keyBy('name');
         $countries = Country::all()->keyBy('name');
         
         $drinks = [
@@ -416,7 +416,6 @@ class ProductSeeder extends Seeder
         $allProducts = array_merge($drinks, $snacks, $sweets, $fruits);
 
         foreach ($allProducts as $allProduct) {
-            // Category we Country ID alýar
             $category = $categories[$allProduct['category']];
             $country = $countries[$allProduct['country']];
 
