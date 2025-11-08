@@ -8,46 +8,46 @@ use App\Http\Controllers\client\ContactController;
 use App\Http\Controllers\client\ProductController;
 use App\Http\Controllers\Client\RegisterController;
 
-Route::get('/about', function () {
-    return view('welcome');
-})->name('about.index');
-
 Route::get('/', [HomeController::class,'home_index'])->name('home.index');
 Route::get('locale/{locale}', [HomeController::class, 'locale'])->name('locale')->where('locale', '[a-z]+');
 
 Route::middleware('guest')
-    ->middleware('throttle:5,1')
-    ->group(function () {
-        Route::get('login', [LoginController::class, 'create'])->name('login');
-        Route::post('login', [LoginController::class, 'store']);
+->middleware('throttle:5,1')
+->group(function () {
+    Route::get('login', [LoginController::class, 'create'])->name('login');
+    Route::post('login', [LoginController::class, 'store']);
 
-        Route::get('register', [RegisterController::class, 'create'])->name('register');
-        Route::post('register', [RegisterController::class, 'store']);
-    });
-
-Route::middleware('auth')
-    ->group(function () {
-        Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
-    });
+    Route::get('register', [RegisterController::class, 'create'])->name('register');
+    Route::post('register', [RegisterController::class, 'store']);
+});
 
 Route::middleware('auth')
-    ->group(function () {
-        Route::controller(ProductController::class)
-            ->prefix('products')
-            ->name('products.')
-            ->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('{slug}', 'show')->name('show')->where('id', '[0-9]+');
-            });
-    });
+->group(function () {
+    Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+});
 
-Route::controller(ContactController::class)
-    ->prefix('contact')
-    ->name('contact.')
+Route::middleware('auth')
+->group(function () {
+    Route::controller(ProductController::class)
+    ->prefix('products')
+    ->name('products.')
     ->group(function () {
         Route::get('', 'index')->name('index');
-        Route::post('', 'store')->name('store');
+        Route::get('{slug}', 'show')->name('show')->where('id', '[0-9]+');
     });
+});
+
+Route::controller(ContactController::class)
+->prefix('contact')
+->name('contact.')
+->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::post('', 'store')->name('store');
+});
+
+Route::get('/about', function () {
+    return view('welcome');
+})->name('about.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

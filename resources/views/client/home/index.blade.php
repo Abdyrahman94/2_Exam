@@ -18,7 +18,7 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
                 @foreach ($products as $product)
                     <div class="col">
-                        <div class="card h-100 border-secondary shadow-sm rounded-4 overflow-hidden">
+                        <div class="card h-100 shadow-sm rounded-4 overflow-hidden">
                             <a href="{{ route('products.show', $product->slug) }}" class="ratio ratio-1x1 bg-light d-block">
                                 @if ($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}"

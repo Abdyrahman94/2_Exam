@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\client;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-
     public function create()
     {
-        return view('client.auth.login');
+        return view('admin.auth.login');
     }
 
     public function store(Request $request)
@@ -22,10 +20,10 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::guard('web')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
 
-           return redirect()->route('products.index')->with([
+           return redirect()->route('admin.dashboard')->with([
                 'success' => "Ustunlikli giris edildi"
             ]);
         }
@@ -37,16 +35,15 @@ class LoginController extends Controller
 
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('home.index')
+        return redirect('/')
             ->with([
                 'success' => 'Ustunlikli cykys edildi',
             ]);
     }
-
 }
