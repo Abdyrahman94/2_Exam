@@ -27,7 +27,7 @@
             <div class="mb-3">
                 <label class="form-label">Category</label>
                 <select name="category_id" class="form-control" required>
-                    <option value="">-- Select Category --</option>
+                    <option value="">-</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -36,7 +36,7 @@
             <div class="mb-3">
                 <label class="form-label">Country</label>
                 <select name="country_id" class="form-control" required>
-                    <option value="">-- Select Country --</option>
+                    <option value="">-</option>
                     @foreach ($countries as $country)
                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                     @endforeach
@@ -44,7 +44,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea name="description" rows="4" class="form-control">{{ old('description') }}</textarea>
+                <textarea name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label">Image</label>

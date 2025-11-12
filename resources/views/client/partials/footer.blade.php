@@ -25,7 +25,7 @@
                             class="bi bi-github small"></i></a>
                     <a href="https://www.tiktok.com/@abdyrahman_94" class="text-dark me-3 fs-4"><i
                             class="bi bi-tiktok small"></i></a>
-                    <a href="#" class="text-dark me-3 fs-4"><i class="bi bi-whatsapp small"></i></a>
+                    <a href="https://www.facebook.com/AbdyrahmanRejepow" class="text-dark me-3 fs-4"><i class="bi bi-facebook small"></i></a>
                     <a href="#" class="text-dark fs-4"><i class="bi bi-linkedin small"></i></a>
                 </div>
             </div>
